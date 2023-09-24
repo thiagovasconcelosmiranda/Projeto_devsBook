@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="column pr-5">
                    <?=$render('feed-edit', ['user'=>$lloggedUser]);?>
+                   
                    <?php foreach($feed['posts'] as $data): ?>
                      <?=$render('feed-item', [
                         'data'=> $data,

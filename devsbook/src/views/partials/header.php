@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
-    <link rel="stylesheet" href="<?=$base;?>/assets/css/styles.css" />
+    <link rel="stylesheet" href="<?=$base;?>/assets/css/styl.css" />
 </head>
 <body>
     <header>

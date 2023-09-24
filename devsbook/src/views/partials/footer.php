@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="assets/js/script.js"></script>
-    <script type="text/javascript" src="assets/js/vanillaModals.js"></script>
+    <script type="text/javascript" src="<?=$base;?>/assets/js/script.js"></script>
+    <script type="text/javascript" src="<?=$base;?>/assets/js/vanillaModals.js"></script>
 </body>
 </html>
