@@ -43,10 +43,10 @@ class ProfileController extends Controller {
         );
            
         //Verificar  se eu o usuário
-        $isFolloeing = false;
+        $isFollowing = false;
 
         if($user->id != $this->lloggedUser->id){
-           $isFolloeing = UserHandler::isFolloeing($this->lloggedUser->id, $user->id);
+           $isFollowing = UserHandler::isFolloeing($this->lloggedUser->id, $user->id);
         }
        
 
@@ -54,7 +54,7 @@ class ProfileController extends Controller {
             'lloggedUser' =>$this->lloggedUser,
             'user' => $user,
             'feed' => $feed,
-             'isFolloeing'=> $isFolloeing
+             'isFollowing'=> $isFollowing
         ]);
     }
 
@@ -73,8 +73,66 @@ class ProfileController extends Controller {
        }
 
        $this->redirect('/profile/'.$to);
-
-
     }
+
+    public function friends($atts=[]){
+        $id =  $this->lloggedUser->id;
+
+        if(!empty($atts['id'])){
+             $id =  $atts['id'];
+        }
+
+        $user = UserHandler::getUser($id, true);
+
+        if(!$user){
+         $this->redirect('/');
+        }
+        $datefrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears = $datefrom->diff($dateTo)->y;
+
+        $isFollowing = false;
+
+        if($user->id != $this->lloggedUser->id){
+           $isFollowing = UserHandler::isFolloeing($this->lloggedUser->id, $user->id);
+        }
+
+        $this->render('profile_friends',[
+            'lloggedUser' =>$this->lloggedUser,
+            'user' => $user,
+            'isFollowing'=> $isFollowing
+        ]);
+    }
+
+    public function photos($atts=[]){
+        $id =  $this->lloggedUser->id;
+
+        if(!empty($atts['id'])){
+             $id =  $atts['id'];
+        }
+
+        $user = UserHandler::getUser($id, true);
+
+        if(!$user){
+         $this->redirect('/');
+        }
+        $datefrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears = $datefrom->diff($dateTo)->y;
+
+        $isFollowing = false;
+
+        if($user->id != $this->lloggedUser->id){
+           $isFollowing = UserHandler::isFolloeing($this->lloggedUser->id, $user->id);
+        }
+
+        $this->render('profile_photos',[
+            'lloggedUser' =>$this->lloggedUser,
+            'user' => $user,
+            'isFollowing'=> $isFollowing
+        ]);
+    }
+
+    
 
 }

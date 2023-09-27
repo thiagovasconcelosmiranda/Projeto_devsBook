@@ -4,43 +4,7 @@
     <?=$render('sidebar', ['activeMenu'=> 'profile']);?>
     <section class="container main">
         <section class="feed">
-            <div class="row">
-                <div class="box flex-1 border-top-flat">
-                    <div class="box-body">
-                        <div class="profile-cover" style="background-image: url('<?=$base;?>/media/covers/<?=$user->cover;?>');"></div>
-                        <div class="profile-info m-20 row">
-                            <div class="profile-info-avatar">
-                                <img src="<?=$base;?>/media/avatars/<?=$user->avatar;?>" />
-                            </div>
-                            <div class="profile-info-name">
-                                <div class="profile-info-name-text"><?= $user->name;?></div>
-                                <?php if(!empty($user->city)): ?>
-                                 <div class="profile-info-location"><?= $user->city;?></div>
-                                 <?php endif; ?>
-                            </div>
-                            <div class="profile-info-data row">
-                               <?php if($user->id != $lloggedUser->id): ?>
-                                <div class="profile-info-item m-width-20">
-                                    <a href="<?=$base;?>/profile/<?=$user->id?>/follow" class="button"><?=(!$isFolloeing)?'Seguir':'Deixar de seguir'?></a>
-                                </div>
-                                    <?php endif; ?>
-                                <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n"><?=count($user->followers);?></div>
-                                    <div class="profile-info-item-s">Seguidores</div>
-                                </div>
-                                <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n"><?=count($user->following);?></div>
-                                    <div class="profile-info-item-s">Seguindo</div>
-                                </div>
-                                <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n"><?=count($user->photos);?></div>
-                                    <div class="profile-info-item-s">Fotos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?=$render('perfil-header', ['user' => $user, 'lloggedUser' => $lloggedUser, 'isFollowing' => $isFollowing  ]);?>
             <div class="row">
                 <div class="column side pr-5">
                     <div class="box">
@@ -70,15 +34,12 @@
                                 <span>(<?=count($user->followers);?>)</span>
                             </div>
                             <div class="box-header-buttons">
-                                <a href="">ver todos</a>
+                                <a href="<?=$base;?>/profile/<?=$user->id;?>/friends">ver todos</a>
                             </div>
                         </div>
                         <div class="box-body friend-list">
                           <?php for($q=0; $q<9; $q++):?>
-                               <?php if(isset($user->following[$q])):
-
-                              
-                                ?>
+                               <?php if(isset($user->following[$q])): ?>
                                 <div class="friend-icon">
                                    <a href="<?=$base;?>/profile/<?=$user->following[$q]->id;?>">
                                      <div class="friend-icon-avatar">
@@ -104,7 +65,7 @@
                                 <span>(<?=count($user->photos);?>)</span>
                             </div>
                             <div class="box-header-buttons">
-                                <a href="">ver todos</a>
+                                <a href="<?=$base;?>/profile/<?=$user->id;?>/photos">ver todos</a>
                             </div>
                         </div>
                         <div class="box-body row m-20">

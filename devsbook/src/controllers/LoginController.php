@@ -78,7 +78,7 @@ class LoginController extends Controller {
          if(UserHandler::emailExists($email) === false){
            $token = UserHandler::addUser($name, $email, $password, $birthdate);
            $_SESSION['token'] = $token;
-          $this->redirect('/');
+           $this->redirect('/');
          }
          else{
             $_SESSION['flash'] =  'Email já!';

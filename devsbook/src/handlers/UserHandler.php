@@ -17,10 +17,12 @@ class UserHandler {
                  $loggedUser->email = $data['email'];
                  $loggedUser->name = $data['name'];
                  $loggedUser->avatar = $data['avatar'];
+                 $loggedUser->birthdate =  $data['birthdate'];
+                 $loggedUser->city = $data['city'];
+                 $loggedUser->work = $data['work'];
                 return $loggedUser;
             }  
         }
-
          return false;
     }
 
@@ -71,7 +73,7 @@ class UserHandler {
                 $newUser->id = $userData['id'];
                 $newUser->name = $userData['name'];
                 $newUser->avatar = $userData['avatar'];
-
+                $newUser->birthdate = $userData['birthdate'];
                 $user->followers[] = $newUser;
              }
 
@@ -84,7 +86,7 @@ class UserHandler {
                $newUser->id = $userData['id'];
                $newUser->name = $userData['name'];
                $newUser->avatar = $userData['avatar'];
-
+               $newUser->birthdate = $userData['birthdate'];
                $user->following[] = $newUser;
             }
 
@@ -144,6 +146,50 @@ class UserHandler {
         ->where('user_from', $from)
         ->where('user_to', $to)
     ->execute();
+  }
+
+  public static function searchUser($term){
+    $users = [];
+     $data = User::select()
+     ->where('name', 'Like', '%'.$term.'%')
+     ->get();
+
+     if($data){
+      foreach($data as $user){
+        $newUser = new User();
+        $newUser->id = $user['id'];
+        $newUser->name = $user['name'];
+        $newUser->avatar = $user['avatar'];
+
+        $users[] = $newUser;
+      }
+         
+     }
+
+     return $users;
+  }
+
+  public static function updateUser($updateFilds){
+     $hash = password_hash($updateFilds['password'], PASSWORD_DEFAULT);  
+     //print_r($updateFilds);
+
+
+     
+     $dados = User::update([
+      'name'=> $updateFilds['name'],
+      'birthdate'=>$updateFilds['birthdate'],
+      'email'=> $updateFilds['email'],
+      'city'=> $updateFilds['city'],
+      'work'=> $updateFilds['work'],
+      'password'=> $hash, 
+      'avatar' =>$updateFilds['avatar'],
+      'cover' =>$updateFilds['cover']
+   ])
+   ->where('id', $updateFilds['id'])
+   ->execute();
+
+   return $dados;
+  
   }
 
   
