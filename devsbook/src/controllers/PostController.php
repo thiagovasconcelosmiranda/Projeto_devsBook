@@ -17,7 +17,6 @@ class PostController extends Controller {
 
     public function new() {
         $body = filter_input(INPUT_POST, 'body');
-
         if($body){
             PostHandler::addPost(
                 $this->lloggedUser->id, 
@@ -26,6 +25,17 @@ class PostController extends Controller {
             );
         }
             $this->redirect('/');
+    }
+
+    public function delete($atts = []){
+       $idPost = $atts['id'];
+
+       if($idPost){
+        PostHandler::deletePost(
+            $idPost,
+            $this->lloggedUser->id );
+       }
+       $this->redirect('/');
     }
 
 }

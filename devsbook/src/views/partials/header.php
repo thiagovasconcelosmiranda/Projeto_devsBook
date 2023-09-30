@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <title></title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
-    <link rel="stylesheet" href="<?=$base;?>/assets/css/sty.css" />
+    <link rel="stylesheet" href="<?=$base;?>/assets/css/styles.css" />
+    <link rel="stylesheet" href="<?=$base;?>/assets/css/feed-items.css" />
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
     <header>

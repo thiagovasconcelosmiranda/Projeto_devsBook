@@ -41,7 +41,7 @@ class ConfigController extends Controller {
         $updateFilds['name'] = $name;
         $updateFilds['email'] = $email;
         $updateFilds['city'] = $city;
-        $updateFilds['work'] = $city;
+        $updateFilds['work'] = $work;
         $updateFilds['password'] = $password;
         $updateFilds['rep_password'] = $rep_password;
 
